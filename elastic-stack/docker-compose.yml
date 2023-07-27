@@ -216,39 +216,32 @@ services:
 #      - ELASTIC_PASSWORD=${ELASTIC_PASSWORD}
 #      - ELASTIC_HOSTS=https://elasticsearch:9200
 
-  apm-server:
-    depends_on:
-      elasticsearch:
-        condition: service_healthy
-    image: docker.elastic.co/apm/apm-server:${STACK_VERSION}
-    cap_add: ["CHOWN", "DAC_OVERRIDE", "SETGID", "SETUID"]
-    cap_drop: ["ALL"]
-    user: apm-server
-    ports:
-    - 8200:8200
-    # volumes:
-    #   - certs:/var/share/apm-server/certs:ro
-    #   - ./apm-server.docker.yml:/var/share/apm-server/apm-server.yml:ro
-    command: >
-       apm-server -e
-         -E apm-server.rum.enabled=true
-         -E setup.kibana.host=kibana:5601
-         -E setup.template.settings.index.number_of_replicas=0
-         -E apm-server.kibana.enabled=true
-         -E apm-server.kibana.host=kibana:5601
-         -E output.elasticsearch.hosts=["https://elasticsearch:9200"]
-         -E output.elasticsearch.username="elastic"
-         -E output.elasticsearch.password="qualquercoisa123"
-         -E output.elasticsearch.ssl.verification_mode=none
-         -E output.elasticsearch.api_key="na6nlIkBCEq0ntCvXg1K:lksevi72RUKKGndSiKJDLg"
-    healthcheck:
-      interval: 10s
-      retries: 12
-      test: curl --write-out 'HTTP %{http_code}' --fail --silent --output /dev/null http://localhost:8200/
-
-  # {
-  # "id":"na6nlIkBCEq0ntCvXg1K",
-  # "name":"teste-apm",
-  # "api_key":"lksevi72RUKKGndSiKJDLg",
-  # "encoded":"bmE2bmxJa0JDRXEwbnRDdlhnMUs6bGtzZXZpNzJSVUtLR25kU2lLSkRMZw=="
-  # }
+  # apm-server:
+  #   depends_on:
+  #     elasticsearch:
+  #       condition: service_healthy
+  #   image: docker.elastic.co/apm/apm-server:${STACK_VERSION}
+  #   cap_add: ["CHOWN", "DAC_OVERRIDE", "SETGID", "SETUID"]
+  #   cap_drop: ["ALL"]
+  #   user: apm-server
+  #   ports:
+  #   - 8200:8200
+  #   # volumes:
+  #   #   - certs:/var/share/apm-server/certs:ro
+  #   #   - ./apm-server.docker.yml:/var/share/apm-server/apm-server.yml:ro
+  #   command: >
+  #      apm-server -e
+  #        -E apm-server.rum.enabled=true
+  #        -E setup.kibana.host=kibana:5601
+  #        -E setup.template.settings.index.number_of_replicas=0
+  #        -E apm-server.kibana.enabled=true
+  #        -E apm-server.kibana.host=kibana:5601
+  #        -E output.elasticsearch.hosts=["https://elasticsearch:9200"]
+  #        -E output.elasticsearch.username="elastic"
+  #        -E output.elasticsearch.password="qualquercoisa123"
+  #        -E output.elasticsearch.ssl.verification_mode=none
+  #        -E output.elasticsearch.api_key="VHk2l4kBp2QQeoMm7nri:GOmUNvIhRXK8LO3N_NSfGg"
+  #   healthcheck:
+  #     interval: 10s
+  #     retries: 12
+  #     test: curl --write-out 'HTTP %{http_code}' --fail --silent --output /dev/null http://localhost:8200/
