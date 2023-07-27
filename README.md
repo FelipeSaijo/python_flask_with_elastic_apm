@@ -31,13 +31,17 @@ command: >
 
 ## APM Server with API Key authentication
 
-```JS
+```bash
+  # JSON
   {
   "id":"na6nlIkBCEq0ntCvXg1K",
   "name":"teste-apm",
   "api_key":"lksevi72RUKKGndSiKJDLg",
   "encoded":"bmE2bmxJa0JDRXEwbnRDdlhnMUs6bGtzZXZpNzJSVUtLR25kU2lLSkRMZw=="
    }
+
+  # Base64
+  echo "VkhrMmw0a0JwMlFRZW9NbTducmk6R09tVU52SWhSWEs4TE8zTl9OU2ZHZw==" | base64 --decode
 ```
 
 ``` bash
